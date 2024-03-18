@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time taken vs. Number of Redundant Bits</title>
+    <style>
+        .myDiv{
+            height: 600px;
+            width: 800px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="myDiv">
+        <canvas id="myChart" height="100" width="100"></canvas>
+    </div>
+    <script>
+        // Data points
+        const numberOfRedBits = [2, 4, 6, 8];
+        const reedSoloTimes = [46.49162292480469, 62.67813110351562, 67.98204040342, 72.91654968261719];
+        const hashingTimes = [26.172927856445312, 25.033950805664062, 27.649765014648438, 30.74920654296875];
+
+        // Create chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: numberOfRedBits,
+                datasets: [{
+                    label: 'Reed-Solomon Encoding',
+                    data: reedSoloTimes,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Hashing (SHA-256)',
+                    data: hashingTimes,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1.5
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Number of Redundant Bits'
+                        },
+                        grid: {
+                            display: false // Hide x-axis grid lines
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        min: 10,
+                        max:100,
+                        title: {
+                            display: true,
+                            text: 'Time Taken (microseconds)'
+                        },
+                        grid: {
+                            display: false // Hide x-axis grid lines
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

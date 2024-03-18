@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Example</title>
+    <style>
+        .myDiv{
+            height: 1200px;
+            width: 800px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="myDiv">
+        <canvas id="myChart" height="700" width="1000"></canvas>
+    </div>
+    <script>
+        // Data points (hardcoded)
+        const numberOfRedBits = [2, 4, 6, 8];
+        const rsAvalanche = [1, 1, 0.9444444444444444, 0.9];
+        const hashAvalanche = [0.984375, 1,  0.984375, 0.984375];
+
+        // Create chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: numberOfRedBits,
+                datasets: [{
+                    label: 'Reed-Solomon',
+                    data: rsAvalanche,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Hashing (SHA-256)',
+                    data: hashAvalanche,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1.5
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        ticks: {
+                            stepSize: 2 // Increase the number of divisions
+                        },
+                        min: 0,
+                        max: 10,
+                        title: {
+                            display: true,
+                            text: 'Number of redundant bits (Hexadecimal)'
+                        },
+                        grid: {
+                            display: false // Hide the x-axis grid lines
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        min: 0,
+                        max: 1.2,
+                        ticks: {
+                            stepSize: 0.01 // Increase the number of divisions
+                        },
+                        title: {
+                            display: true,
+                            text: 'Avalanche effect'
+                        },
+                        grid: {
+                            display: false // Hide the y-axis grid lines
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
