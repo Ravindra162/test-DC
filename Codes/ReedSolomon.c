@@ -2,7 +2,7 @@
 #include <time.h>
 // 14 16 18 20
 #define mm 4
-/* GF(2**3) */
+/* GF(2**4) */
 #define nn 14
 /* nn=2**mm -1 length of codeword */
 #define tt 1
